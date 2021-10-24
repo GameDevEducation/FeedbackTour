@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38b0353f80e5e5b4c887c2cdd4af1132, type: 3}
+  m_Name: Haptic - Pylon Impact
+  m_EditorClassIdentifier: 
+  Type: 0
+  Duration: 0.25
+  LowSpeedIntensity: 1
+  LowSpeedMotor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 65
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: -0
+      outSlope: 0.005274956
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.4324565
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0.0055556977
+      outSlope: 0.0055556977
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.13687027
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  HighSpeedIntensity: 0
+  HighSpeedMotor:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  VariesWithDistance: 1
+  MaxDistance: 25
+  FallOffCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.025389818
+      outSlope: 0.025389818
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.0449233
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.057518054
+      outSlope: -0.057518054
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.03305334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
