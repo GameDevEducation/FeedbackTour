@@ -1,3 +1,5 @@
+// Based heavily on CinemachineIndependentImpulseListener
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,8 @@ public class HapticManager : MonoBehaviour
     public static HapticManager Instance { get; private set; } = null;
 
     List<HapticEffectSO> ActiveEffects = new List<HapticEffectSO>();
+    float Ambient_LowSpeed = 0f;
+    float Ambient_HighSpeed = 0f;
 
     public static HapticEffectSO PlayEffect(HapticEffectSO effect, Vector3 location)
     {
@@ -17,6 +21,11 @@ public class HapticManager : MonoBehaviour
     public static void StopEffect(HapticEffectSO effect)
     {
         Instance.StopEffect_Internal(effect);
+    }
+
+    public static void SetAmbientSpeeds(float lowSpeedMotor, float highSpeedMotor)
+    {
+        Instance.SetAmbientSpeeds_Internal(lowSpeedMotor, highSpeedMotor);
     }
 
     void Awake()
@@ -41,8 +50,8 @@ public class HapticManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float lowSpeedMotor = 0f;
-        float highSpeedMotor = 0f;
+        float lowSpeedMotor = Ambient_LowSpeed;
+        float highSpeedMotor = Ambient_HighSpeed;
 
         for(int index = 0; index < ActiveEffects.Count; ++index)
         {
@@ -63,12 +72,14 @@ public class HapticManager : MonoBehaviour
         }
 
         // update the motors
-        Gamepad.current.SetMotorSpeeds(lowSpeedMotor, highSpeedMotor);
+        if (Gamepad.current != null)
+            Gamepad.current.SetMotorSpeeds(lowSpeedMotor, highSpeedMotor);
     }
 
     void OnDestroy()
     {
-        Gamepad.current.SetMotorSpeeds(0f, 0f);
+        if (Gamepad.current != null)
+            Gamepad.current.SetMotorSpeeds(0f, 0f);
     }
 
     HapticEffectSO PlayEffect_Internal(HapticEffectSO effect, Vector3 location)
@@ -85,5 +96,11 @@ public class HapticManager : MonoBehaviour
     void StopEffect_Internal(HapticEffectSO effect)
     {
         ActiveEffects.Remove(effect);
+    }
+
+    void SetAmbientSpeeds_Internal(float lowSpeedMotor, float highSpeedMotor)
+    {
+        Ambient_LowSpeed = lowSpeedMotor;
+        Ambient_HighSpeed = highSpeedMotor;
     }
 }

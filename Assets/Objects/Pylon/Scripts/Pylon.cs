@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pylon : MonoBehaviour
 {
@@ -11,7 +12,10 @@ public class Pylon : MonoBehaviour
     [SerializeField] AnimationCurve FallCurve;
     [SerializeField] float MaxHeight = 5f;
 
+    [SerializeField] bool UseHaptics = true;
     [SerializeField] HapticEffectSO ImpactEffect;
+
+    [SerializeField] UnityEvent OnImpact = new UnityEvent();
 
     float CurrentProgress = 0f;
     bool IsRising = true;
@@ -23,6 +27,8 @@ public class Pylon : MonoBehaviour
     {
         StartPos = MovingMass.localPosition;
         EndPos = StartPos + Vector3.up * MaxHeight;
+
+        CurrentProgress = Random.Range(0f, 1f);
     }
 
     // Update is called once per frame
@@ -40,7 +46,11 @@ public class Pylon : MonoBehaviour
         {
             // time to play impact effect?
             if (!IsRising)
-                HapticManager.PlayEffect(ImpactEffect, MovingMass.transform.position);
+            {
+                if (UseHaptics)
+                    HapticManager.PlayEffect(ImpactEffect, MovingMass.transform.position);
+                OnImpact.Invoke();
+            }
 
             // reset for the next move
             IsRising = !IsRising;
