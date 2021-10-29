@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7248498720269372048}
   - component: {fileID: 7248498720269372047}
   - component: {fileID: 7257432183200047641}
+  - component: {fileID: 1681839294933731604}
   m_Layer: 0
   m_Name: Pylon
   m_TagString: Untagged
@@ -164,7 +165,8 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   MaxHeight: 2
-  ImpactEffect: {fileID: 0}
+  UseHaptics: 0
+  ImpactEffect: {fileID: 11400000, guid: 260a5866e35e32940a39f9d6a7670ff2, type: 2}
   OnImpact:
     m_PersistentCalls:
       m_Calls:
@@ -180,6 +182,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  ImpactSound: {fileID: 11400000, guid: 4f7702dc870444040b773bcb1102094a, type: 2}
+  RisingSound: {fileID: 11400000, guid: f826610356ba8794e851e5079a448510, type: 2}
+  FallingSound: {fileID: 11400000, guid: 00bc69b07daee0b498601b52857d0108, type: 2}
+  ImpactDamage: 20
+  DamageTrigger: {fileID: 1681839294933731604}
 --- !u!114 &7257432183200047641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,6 +229,19 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 50
     m_PropagationSpeed: 343
+--- !u!135 &1681839294933731604
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7248498720269372046}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0.000000059604645, y: -1, z: -0.00000008940697}
 --- !u!1 &7248498720812276639
 GameObject:
   m_ObjectHideFlags: 0

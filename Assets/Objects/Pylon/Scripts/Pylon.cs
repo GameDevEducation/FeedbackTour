@@ -21,7 +21,12 @@ public class Pylon : MonoBehaviour
     [SerializeField] SoundEffect RisingSound;
     [SerializeField] SoundEffect FallingSound;
 
+    [SerializeField] float ImpactDamage = 20f;
+    [SerializeField] SphereCollider DamageTrigger;
+
     SoundEmitter ActiveSoundEmitter = null;
+    List<DamageReceiver> DamageableObjects = new List<DamageReceiver>();
+    float MaxDamageRange;
 
     float CurrentProgress = 0f;
     bool IsRising = true;
@@ -35,6 +40,9 @@ public class Pylon : MonoBehaviour
         EndPos = StartPos + Vector3.up * MaxHeight;
 
         CurrentProgress = Random.Range(0f, 1f);
+
+        MaxDamageRange = Mathf.Sqrt((DamageTrigger.bounds.extents.x * DamageTrigger.bounds.extents.x) +
+                                    (DamageTrigger.bounds.extents.z * DamageTrigger.bounds.extents.z));
 
         ActiveSoundEmitter = AudioManager.PlaySoundEffect(RisingSound, GetSoundLocation, GetSoundIntensity);
     }
@@ -73,6 +81,25 @@ public class Pylon : MonoBehaviour
                 OnImpact.Invoke();
 
                 AudioManager.PlaySoundEffect(ImpactSound, MovingMass.position);
+
+                // notify any damageable objects
+                for(int index = 0; index < DamageableObjects.Count; ++index)
+                {
+                    // clear any null entries
+                    if (DamageableObjects[index] == null)
+                    {
+                        DamageableObjects.RemoveAt(index);
+                        --index;
+                        continue;
+                    }
+
+                    Vector3 vecToTarget = DamageableObjects[index].transform.position - transform.position;
+                    float dist2D = Mathf.Sqrt(vecToTarget.x * vecToTarget.x + vecToTarget.z * vecToTarget.z);
+
+                    float damage = ImpactDamage * (1f - Mathf.Clamp01(dist2D / MaxDamageRange));
+
+                    DamageableObjects[index].TakeDamage(damage);
+                }
             }
 
             // reset for the next move
@@ -89,4 +116,18 @@ public class Pylon : MonoBehaviour
                 ActiveSoundEmitter = AudioManager.PlaySoundEffect(FallingSound, GetSoundLocation, GetSoundIntensity);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        DamageReceiver receiver = null;
+        if (other.gameObject.TryGetComponent<DamageReceiver>(out receiver))
+            DamageableObjects.Add(receiver);
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        DamageReceiver receiver = null;
+        if (other.gameObject.TryGetComponent<DamageReceiver>(out receiver))
+            DamageableObjects.Remove(receiver);
+    }    
 }
