@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830abe91ce4f6244cb55972ba533e49c, type: 3}
+  m_Name: SoundEffect_PylonFall
+  m_EditorClassIdentifier: 
+  EmitterTemplate: {fileID: 4113156016290640450, guid: dbbd7f637829f334fbfbd3d5a44e894f, type: 3}
+  Clips:
+  - {fileID: 8300000, guid: 3c3073fc16ae5b443b9fc8be31f40969, type: 3}
+  - {fileID: 8300000, guid: 20676b2f0be324442a74a059f4b2adb0, type: 3}
+  - {fileID: 8300000, guid: f74ceaf5bbdaa594bb70fb752ace0b3c, type: 3}
+  - {fileID: 8300000, guid: 5622b3cb2ee49414cb07a30c12131ce1, type: 3}
+  IsLooped: 1
+  DefaultVolume: 1
+  PitchAdjustment: 0.25
+  PitchVariation: 0.1

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830abe91ce4f6244cb55972ba533e49c, type: 3}
+  m_Name: SoundEffect_Footstep
+  m_EditorClassIdentifier: 
+  EmitterTemplate: {fileID: 0}
+  Channel: 0
+  Clips:
+  - {fileID: 8300000, guid: 8868b5756fa5a5040a275570c82dc1de, type: 3}
+  - {fileID: 8300000, guid: 9c3031aeca328234c8cf292d65065a7a, type: 3}
+  - {fileID: 8300000, guid: b3811603accea9446b624bb6153de410, type: 3}
+  - {fileID: 8300000, guid: be688722e7caf8341917b30fb747d6d2, type: 3}
+  IsLooped: 0
+  DefaultVolume: 0.1
+  PitchAdjustment: 0
+  PitchVariation: 0.15

@@ -17,6 +17,12 @@ public class Pylon : MonoBehaviour
 
     [SerializeField] UnityEvent OnImpact = new UnityEvent();
 
+    [SerializeField] SoundEffect ImpactSound;
+    [SerializeField] SoundEffect RisingSound;
+    [SerializeField] SoundEffect FallingSound;
+
+    SoundEmitter ActiveSoundEmitter = null;
+
     float CurrentProgress = 0f;
     bool IsRising = true;
     Vector3 StartPos;
@@ -29,6 +35,21 @@ public class Pylon : MonoBehaviour
         EndPos = StartPos + Vector3.up * MaxHeight;
 
         CurrentProgress = Random.Range(0f, 1f);
+
+        ActiveSoundEmitter = AudioManager.PlaySoundEffect(RisingSound, GetSoundLocation, GetSoundIntensity);
+    }
+
+    Vector3 GetSoundLocation()
+    {
+        return MovingMass.position;
+    }
+
+    float GetSoundIntensity()
+    {
+        if (IsRising)
+            return RiseCurve.Evaluate(CurrentProgress);
+        else
+            return 1f - FallCurve.Evaluate(CurrentProgress);
     }
 
     // Update is called once per frame
@@ -50,11 +71,22 @@ public class Pylon : MonoBehaviour
                 if (UseHaptics)
                     HapticManager.PlayEffect(ImpactEffect, MovingMass.transform.position);
                 OnImpact.Invoke();
+
+                AudioManager.PlaySoundEffect(ImpactSound, MovingMass.position);
             }
 
             // reset for the next move
             IsRising = !IsRising;
             CurrentProgress = 0f;
+
+            // cleanup the previous emitter
+            Destroy(ActiveSoundEmitter.gameObject);
+
+            // start the new sound
+            if (IsRising)
+                ActiveSoundEmitter = AudioManager.PlaySoundEffect(RisingSound, GetSoundLocation, GetSoundIntensity);
+            else
+                ActiveSoundEmitter = AudioManager.PlaySoundEffect(FallingSound, GetSoundLocation, GetSoundIntensity);
         }
     }
 }
