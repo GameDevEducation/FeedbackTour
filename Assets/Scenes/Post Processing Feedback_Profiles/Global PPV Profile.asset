@@ -30,3 +30,22 @@ MonoBehaviour:
   enabled:
     overrideState: 1
     value: 1
+  Intensity:
+    overrideState: 1
+    value: 0
+  DamageColour:
+    overrideState: 1
+    value: {r: 1, g: 0, b: 0, a: 1}
+  OverlayTexture:
+    overrideState: 1
+    value: {fileID: 2800000, guid: 1de4c58590254da4da9becc0db122778, type: 3}
+    defaultState: 1
+  Roundness:
+    overrideState: 1
+    value: 1
+  Smoothness:
+    overrideState: 1
+    value: 0.25
+  Opacity:
+    overrideState: 1
+    value: 0.5
